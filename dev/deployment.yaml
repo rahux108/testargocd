@@ -1,32 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: getemployeename
   name: getemployeename
 spec:
-  replicas: 1
   selector:
-    app: getemployeename
-    deploymentconfig: getemployeename
-  strategy:
-    activeDeadlineSeconds: 21600
-    resources: {}
-    rollingParams:
-      intervalSeconds: 1
-      maxSurge: 25%
-      maxUnavailable: 25%
-      timeoutSeconds: 600
-      updatePeriodSeconds: 1
-    type: Rolling
+    matchLabels:
+      app: getemployeename
+  replicas: 1
   template:
     metadata:
       labels:
         app: getemployeename
-        deploymentconfig: getemployeename
     spec:
       containers:
-        - env:
+      - env:
            - name: NODENAME
              value: A.getemployeename
            - name: PORT
@@ -41,12 +28,3 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-  test: false
