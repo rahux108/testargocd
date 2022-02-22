@@ -13,18 +13,17 @@ spec:
         app: getemployeename
     spec:
       containers:
-      - env:
-           - name: NODENAME
-             value: A.getemployeename
-           - name: PORT
-             value: "8080"
-           - name: BW_PROFILE
-             value: docker
-           - name: EMP_NAME
-             value: Vinod
+        - name: getemployeename
           image: docker.io/vinodjadhav/getemployeename
           imagePullPolicy: Always
-          name: getemployeename
           ports:
             - containerPort: 8080
-              protocol: TCP
+          env:
+            - name: NODENAME
+              value: A.getemployeename           # an explicit env var value
+            - name: PORT
+              value: "8080"              
+            - name: BW_PROFILE
+              value: docker
+            - name: EMP_NAME
+              value: Vinod
